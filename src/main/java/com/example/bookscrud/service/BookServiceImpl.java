@@ -1,6 +1,7 @@
 package com.example.bookscrud.service;
 
 import com.example.bookscrud.entity.BookEntity;
+import com.example.bookscrud.exception.BookNotFoundException;
 import com.example.bookscrud.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class BookServiceImpl implements BookService{
     @Override
     public BookEntity findBookById(Long Id) {
         Optional<BookEntity> bookinfo = bookRepository.findById(Id);
-        return bookinfo.get();
+        return bookinfo.orElseThrow(
+                ()
+                        -> new BookNotFoundException("Book Not found"));
     }
 
     @Override

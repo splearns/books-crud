@@ -6,11 +6,13 @@ import com.example.bookscrud.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated
 public class BookController {
 
 @Autowired
@@ -25,8 +27,9 @@ public class BookController {
 
     @GetMapping("/getBookById/{id}")
     public ResponseEntity<BookEntity> getBookById(@PathVariable("id") Long Id) {
-        BookEntity singleBook = bookService.findBookById(Id);
-        return new ResponseEntity<>(singleBook, HttpStatus.OK);
+        BookEntity singleBook = bookService.findBookById(Id) ;
+               return new ResponseEntity<>(singleBook, HttpStatus.OK);
+
     }
 
 

@@ -1,13 +1,11 @@
 package com.example.bookscrud.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.Getter;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -21,14 +19,20 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    @NotNull
+    @Size(min = 5)
     private String name;
     @Column
+    @Size(max = 250)
     private String description;
     @Column
     private String author;
     @Column
+    @NotNull
     private double price;
     @Column
+    @NotNull
+    @Pattern(regexp = "^[A-Za-z]{3}-\\d{4}$")
     private String isbn;
     @Column
     private String classification;
